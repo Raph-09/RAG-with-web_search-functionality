@@ -1,0 +1,14 @@
+flask
+flask-cors
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
+langchain-groq
+tavily-python
+requests
+urllib3
+aiohttp
+async-timeout
+python-dotenv
+setuptools
