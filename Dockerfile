@@ -1,28 +1,30 @@
-## Parent image
-FROM python:3.10-slim
+# Use official Python image
+FROM python:3.11-slim
 
-## Essential environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
-## Work directory inside the docker container
+# Set working directory
 WORKDIR /app
 
-## Installing system dependancies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
-    curl \
     && rm -rf /var/lib/apt/lists/*
 
-## Copying ur all contents from local to app
+# Copy requirements first (for caching)
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your app
 COPY . .
 
-## Run setup.py
-RUN pip install --no-cache-dir -e .
+# Expose the port your app will run on
+EXPOSE 8000
 
-# Used PORTS
-EXPOSE 8501
-EXPOSE 9999
+# Set environment variables (optional defaults, can be overridden in Azure)
+ENV FLASK_ENV=production
+ENV PORT=8000
 
-# Run the app 
+# Run the app
 CMD ["python", "app.py"]

@@ -1,6 +1,7 @@
 .env
 venv/
 virtual/
+__pycache__/
 RAG_with_web_search_functionality.egg-info/
 
 
