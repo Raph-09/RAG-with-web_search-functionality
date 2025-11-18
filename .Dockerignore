@@ -1,4 +1,10 @@
 .env
 venv/
+venv2/
+venv3/
+venv5/
+venv6/
+venv7/
 virtual/
+new_venv/
 RAG_with_web_search_functionality.egg-info/
